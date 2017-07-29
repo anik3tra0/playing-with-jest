@@ -1,0 +1,20 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "math-test.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testRegex": ".*-test\\.js$",
+    "testEnvironment": "node",
+    "rootDir": "./spec"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^20.0.4"
+  }
+}
