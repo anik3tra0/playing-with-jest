@@ -1,8 +1,8 @@
-const add = require('./math').add;
-const subtract = require('./math').subtract;
-const multiply = require('./math').multiply;
-const divide = require('./math').divide;
-const Validate = require('./math').Validate;
+const add = require('../math').add;
+const subtract = require('../math').subtract;
+const multiply = require('../math').multiply;
+const divide = require('../math').divide;
+const Validate = require('../math').Validate;
 
 describe('ifNumber', () => {
   it('should validate a dataset if it contains numbers', () => {
