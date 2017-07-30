@@ -1,24 +1,52 @@
+const add = require('./math').add;
+const subtract = require('./math').subtract;
+const multiply = require('./math').multiply;
+const divide = require('./math').divide;
+const Validate = require('./math').Validate;
 
-const add = require('../math').add;
-const substract = require('../math').substract;
-const multiply = require('../math').multiply;
-const divide = require('../math').divide;
+describe('ifNumber', () => {
+  it('should validate a dataset if it contains numbers', () => {
+    expect(Validate.ifNumber([1,2,3,4,5])).toBeTruthy();
+  });
 
-describe('add', () => {
-  it('should add two numbers', () => {
-    expect(add(1, 2)).toBe(3);
+  it('should not validate a dataset if it contains characters', () => {
+    expect(Validate.ifNumber([1,2,'a',4,'z'])).toBeFalsy();
   });
 });
 
-describe('substract', () => {
-  it('should substract the smaller number from the greater number', () => {
-    expect(substract(10,5)).toBe(5);
+describe('minFive', () => {
+  it('should validate a dataset if it has a minimum of 5 numbers', () => {
+    expect(Validate.minFive([1,2,3,4,5])).toBeTruthy();
+  });
+
+  it('should not validate a dataset if it does not have a minimum of 5 numbers', () => {
+    expect(Validate.minFive([1,2,4])).toBeFalsy();
+  });
+});
+
+describe('add', () => {
+  it('should only contain numbers', () => {
+    expect(add([1,4,2,'a','z'])).toMatch('Invalid Dataset');
+  });
+
+  it('should add all numbers in array', () => {
+    expect(add([1, 2, 3, 4, 5])).toBe(15);
+  });
+
+  it('should not add if numbers are less than 5', () => {
+    expect(add([1,2,3])).toMatch('need more');
+  });
+});
+
+describe('subtract', () => {
+  it('should subtract the smaller number from the greater number', () => {
+    expect(subtract(10,5)).toBe(5);
   });
 
   it('should log invalid if the second number is bigger than the first', () => {
-    expect(substract(5,10)).toMatch('Invalid');
+    expect(subtract(5,10)).toMatch('Invalid');
   });
-})
+});
 
 describe('multiply', () => {
   it('should mupliply all numbers in array', () => {
@@ -26,7 +54,7 @@ describe('multiply', () => {
   });
 
   it('should not multiply if numbers are less than 5', () => {
-    expect(multiply([1,2,3])).toMatch('need');
+    expect(multiply([1,2,3])).toMatch('need more');
   });
 
   it('should only contain numbers', () => {

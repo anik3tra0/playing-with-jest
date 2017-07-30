@@ -1,8 +1,32 @@
-function add(a, b) {
-  return a + b;
+const Validate = {
+  ifNumber: function(numbers) {
+    const types = numbers.map((num) => typeof(num) === 'number');
+    if (types.includes(false)) {
+      return false;
+    }
+    return true;
+  },
+  minFive: function(numbers) {
+    if (numbers.length < 5) {
+      return false;
+    }
+    return true;
+  }
+};
+
+function add(numbers) {
+  if (!Validate.ifNumber(numbers)) {
+    return 'Invalid Dataset';
+  }
+
+  if (!Validate.minFive(numbers)) {
+    const remainder = subtract(5, numbers.length);
+    return `You need more ${remainder} number(s) in the array`;
+  }
+  return numbers.reduce(function(a,b){return a+b;});
 }
 
-function substract(a,b) {
+function subtract(a,b) {
   if (b > a) {
     return "Invalid";
   }
@@ -10,14 +34,12 @@ function substract(a,b) {
 }
 
 function multiply(numbers) {
-  const types = numbers.map((num) => typeof(num) === 'number');
-
-  if (types.includes(false)) {
-    return 'Invalid Dataset, Need array of numbers';
+  if (!Validate.ifNumber(numbers)) {
+    return 'Invalid Dataset';
   }
 
-  if (numbers.length < 5) {
-    const remainder = substract(5, numbers.length);
+  if (!Validate.minFive(numbers)) {
+    const remainder = subtract(5, numbers.length);
     return `You need more ${remainder} number(s) in the array`;
   }
 
@@ -34,4 +56,4 @@ function divide(a,b,ops) {
   }
 }
 
-module.exports = {add, substract, multiply, divide};
+module.exports = {add, subtract, multiply, divide, Validate};
